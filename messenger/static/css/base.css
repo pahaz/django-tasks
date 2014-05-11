@@ -1,0 +1,142 @@
+body{
+    background-color: #f4fffc;
+}
+.content{
+    margin-left: 50px;
+    margin-right: 100px;
+}
+.required{
+    list-style: none;
+    position: relative;
+    height: 0;
+    bottom: 20px;
+    color: red;
+    font-size: 10px;
+
+}
+
+.invalid{
+
+    color: #e52f37;
+    list-style: none;
+}
+
+.user{
+
+    display: inline-table;
+    padding-left: 10%;
+    padding-bottom: 20px;
+
+}
+
+.contacts {
+    padding-top: 50px;
+}
+
+.user_info{
+    position: relative;
+    height: 0;
+    #bottom: 20px;
+    margin-top: -20px;
+
+
+}
+.add_to_friends{
+
+    padding-top: 20px;
+}
+
+.status {
+    padding-top: 20px;
+
+}
+
+.glow img:hover{
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(123, 168, 255, 1.0);
+  -webkit-box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+     -moz-box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+          box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+
+
+}
+
+.history[readonly]{
+  width: 800px;
+  height: 300px;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(123, 168, 255, 1.0);
+  -webkit-box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+     -moz-box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+          box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+
+}
+
+
+.wide{
+  position: relative;
+  width: 800px;
+  padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(123, 168, 255, 1.0);
+  -webkit-box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+     -moz-box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+          box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+}
+
+.form form {
+  background: #f1def7;
+  border-radius: 10px;
+  #margin: 40px auto;
+  -moz-border-radius: 10px;
+  overflow: hidden;
+  padding: 40px;
+  -webkit-border-radius: 10px;
+  width: 230px;
+  border: 1px solid #ccc;
+  #border: 1px solid rgba(123, 168, 255, 1.0);
+  -webkit-box-shadow: -2px 3px 5px 1px rgba(123, 168, 255, 1.0);
+     -moz-box-shadow: -2px 3px 5px 1px rgba(123, 168, 255, 1.0);
+          box-shadow: -2px 3px 5px 1px rgba(123, 168, 255, 1.0);
+}
+
+.chat{
+    margin-bottom: 20px;
+    overflow-y:scroll;
+    #overflow-y:hidden;
+    height: 250px;
+    width: 850px;
+      padding: 4px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(123, 168, 255, 1.0);
+   -webkit-border-radius: 10px;
+  -webkit-box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+     -moz-box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+          box-shadow: 0 1px 5px rgba(123, 168, 255, 1.0);
+
+
+}
+
+.my_message{
+    color: #03f400;
+    font-weight: 800;
+}
+
+.friend_message{
+    color: #f01119;
+    font-weight: 800;
+}
+
+.chat::-webkit-scrollbar {
+    display: none;
+}
+
+.unread{
+    background-color: #beffd1;
+}
