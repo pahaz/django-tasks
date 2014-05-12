@@ -3,7 +3,23 @@
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript">
 
-   
+     function show()
+        {
+            $.ajax({
+                url: "/unread/with/{{ user.username }}",
+                cache: false,
+                success: function(html){
+                    $("#unread").append(html);
+                }
+            });
+        }
+
+        $(document).ready(function(){
+            show();
+            setInterval('show()',1000);
+        });
+
+
     $(function() {
 
         $("#message_input").focus();
@@ -36,9 +52,11 @@
             </div>
         {% endif %}
         {{ message.message }}
+
         </div>
         <br>
     {% endfor %}
+    <div id="unread"> </div>
     </div>
     <form action="" method="post"> {% csrf_token %}
    <div class="input-append" >

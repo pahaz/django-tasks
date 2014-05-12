@@ -3,12 +3,11 @@ from django.contrib.auth.forms import  UserCreationForm, AuthenticationForm
 from chat.forms import RegistrationForm, InfoForm
 from django.core.urlresolvers import reverse
 from django.contrib import auth
-from django.http.response import HttpResponseRedirect
+from django.http.response import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from chat.models import ChatUser, UserFriends, Message
-import shutil
 
 def login(request):
     if request.user.is_authenticated():
@@ -182,7 +181,4 @@ def unread_with(request, name):
 
 
 
-    return render(request,  'chat/unread.html', {'user': user,
-                                               'friend': friend,
-                                               'unread': unread
-                                               })
+    return HttpResponse(unread)
