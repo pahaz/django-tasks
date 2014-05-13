@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block library %}
+    {% if username %}
+    <title>Мои Книги</title>
+    {% for book in books %}
+    <h4> {{ book.title }}</h4>
+    <h5> Автор: {{book.authors.get}}</h5>
+        <p>
+        {% with book.photo as photo %}
+                <img src="{% static photo %}" width ="200px" height="200px">
+        {% endwith %}
+        </p>
+    <hr>
+    {% endfor %}
+        <h3>Вы приобрели книг на сумму: {{ sum }} рублей</h3>
+        <h4>Способ оплаты:</h4>
+        {% for pay in Pays %}
+            <h5> {{ pay }} </h5>
+            <a href="/my_books/choice/"><input type="submit" class="button" value="Выбрать" ></a>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
