@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FileExchange</title>
+</head>
+<body>
+    <h1>FileExchange</h1>
+    <div>
+        <ul>
+            {% if user.is_authenticated %}
+            <h3>{{ user.username }} is logged in!</h3>
+               <li><a href={% url 'shared_files' %}>View available files</a></li>
+               <li> <a href={% url 'logout' %}>Logout</a> </li>
+               <li> <a href={% url 'profile' %}>View profile</a> </li>
+            {% else %}
+                <li> <a href={% url 'register' %}>Register</a> </li>
+                <li> <a href={% url 'login' %}>Login</a> </li>
+            {% endif %}
+        </ul>
+    </div>
+</body>
+</html>

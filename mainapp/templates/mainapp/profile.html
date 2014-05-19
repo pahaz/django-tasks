@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html align="center">
+<head>
+    <title>{{ user_profile.user.username }}</title>
+</head>
+<body>
+    <h3>{{ user_profile.user.username  }} profile page</h3>
+    <img src={{ user_profile.picture.url  }} height=200>
+
+    <p>You have {{ user_profile.credits }} credits</p>
+    {% if purchased_documents %}
+        <h4>Purchased documents: </h4>
+        {% for document in purchased_documents %}
+            <p>
+                {{ document.filename }}
+                <form method="get" action="{% url "download" document.id %}">
+                    <button type="submit">Download document</button>
+                </form>
+            </p>
+        {% endfor %}
+    {% else %}
+        <h4>You haven't purchased anything yet </h4>
+    {% endif %}
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+	</head>
+
+	<body>
+        <p>You have {{ credits_amount }} credits left</p>
+        <h3>Available documents</h3>
+		{% if documents %}
+			<ul>
+			{% for document in documents %}
+                <form method="get" action="{% url "download" document.id %}">
+                {{ document.filename }}
+                {%  if document not in purchased_documents %}
+                    {% if credits_amount >= document.price %}
+                        <button type="submit" >Download just for {{ document.price }} credits!</button>
+                    {% else %}
+                        <button type="submit" disabled>Download just for {{ document.price }} credits!</button>
+                    {% endif %}
+                {% else %}
+                    <button type="submit">Download document</button>
+                {% endif %}
+                </form>
+			{% endfor %}
+			</ul>
+		{% else %}
+			<p>No documents.</p>
+		{% endif %}
+
+		<form action="{% url 'shared_files' %}" method="post" enctype="multipart/form-data">
+			{% csrf_token %}
+			<p>{{ form.non_field_errors }}</p>
+			<p> <h3>{{ form.docfile.label_tag }}</h3></p>
+			<p>
+				{{ form.docfile.errors }}
+				{{ form.docfile }}
+			</p>
+                Price: <input type="text" name="price" value="0" size="10" />
+			<p><input type="submit" value="Upload" /></p>
+		</form>
+		
+	</body>
+
+</html> 
