@@ -69,7 +69,7 @@ ROOT_URLCONF = 'Project_Django_Course.urls'
 
 WSGI_APPLICATION = 'Project_Django_Course.wsgi.application'
 
-#INTERNAL_IPS = ('127.0.0.1', '10.97.16.119',)
+# INTERNAL_IPS = ('127.0.0.1', '192.168.1.3',)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases

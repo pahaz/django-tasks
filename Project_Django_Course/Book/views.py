@@ -1,15 +1,19 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response, redirect, get_object_or_404, render
+from django.shortcuts import redirect, get_object_or_404, render
 from Book.models import Book, Comments, Pay
 from Book.forms import CommentForm
+from django.core.paginator import Paginator
+import re
 # from django.contrib import auth
 # from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
 
 
-def books(request):
-    return render(request, 'books.html', {'books': Book.objects.all(), 'username': request.user.username})
+def books(request, page_number=1):
+    all_books = Book.objects.all()
+    current_page = Paginator(all_books, 2)
+    return render(request, 'books.html', {'books': current_page.page(page_number), 'username': request.user.username})
 
 
 # Тож вроде норм
@@ -23,13 +27,17 @@ def only_one_book(request, book_id):
 
 # Вродь норм
 def add_like(request, book_id):
+    number = round(int(book_id)/2+0.1)
+    # print(number)
+    if number == 0:
+        number = 1
     if book_id in request.COOKIES:
-        return redirect('/')
+        return redirect('/page/%s' % number)
     else:
         book = get_object_or_404(Book, id=book_id)
         book.likes += 1
         book.save()
-        response = redirect('/')
+        response = redirect('/page/%s' % number)
         response.set_cookie(book_id, "like")
         return response
 
