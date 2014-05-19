@@ -2,7 +2,7 @@
 
 # Create your views here.
 
-from django.shortcuts import render_to_response, redirect, render
+from django.shortcuts import redirect, render
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 
