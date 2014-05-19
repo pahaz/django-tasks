@@ -16,7 +16,11 @@ def index(request):
 def profile(request):
     user_profile = UserProfile.objects.get(user=request.user)
     purchased_documents = user_profile.purchased_documents.all()
-    return render(request, 'mainapp/profile.html', {'user_profile': user_profile, 'purchased_documents': purchased_documents})
+    return render(request,
+                  'mainapp/profile.html',
+                  {'user_profile': user_profile,
+                   'purchased_documents': purchased_documents})
+
 
 @login_required
 def get_credits(request):
@@ -27,30 +31,34 @@ def get_credits(request):
 
 
 @login_required
-def list(request):
+def shared_files(request):
     # Handle file upload
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
-            newdoc = Document(docfile=request.FILES['docfile'], uploaded_by=request.user, price=request.POST['price'])
+            newdoc = Document(docfile=request.FILES['docfile'],
+                              uploaded_by=request.user,
+                              price=request.POST['price'])
             newdoc.save()
 
-            # Redirect to the document list after POST
-            return HttpResponseRedirect(reverse('mainapp.views.list'))
+            # Redirect to the shared files page after POST
+            return HttpResponseRedirect(reverse('mainapp.views.shared_files'))
     else:
         form = DocumentForm()  # A empty, unbound form
 
-    # Load documents for the list page
     documents = Document.objects.all()
     user_profile = UserProfile.objects.get(user=request.user)
     credits_amount = user_profile.credits
     purchased_documents = user_profile.purchased_documents.all()
 
     return render_to_response(
-        'mainapp/list.html',
-        {'documents': documents, 'form': form, 'credits_amount': credits_amount, 'purchased_documents': purchased_documents},
+        'mainapp/shared_files.html',
+        {'documents': documents, 'form': form,
+         'credits_amount': credits_amount,
+         'purchased_documents': purchased_documents},
         context_instance=RequestContext(request)
     )
+
 
 @login_required
 def download(request, document_id):
@@ -91,7 +99,9 @@ def register(request):
         profile_form = UserProfileForm()
     return render_to_response(
         'mainapp/register.html',
-        {'user_form': user_form, 'profile_form': profile_form, 'registered': registered},
+        {'user_form': user_form,
+         'profile_form': profile_form,
+         'registered': registered},
         context
     )
 
@@ -114,6 +124,7 @@ def user_login(request):
             return HttpResponse('Invalid login and/or password')
     else:
         return render_to_response('mainapp/login.html', {}, context)
+
 
 @login_required
 def user_logout(request):
