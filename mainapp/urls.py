@@ -3,7 +3,7 @@ from django.conf.urls import patterns, url
 
 urlpatterns = patterns('mainapp.views',
     url(r'^$', 'index', name='index'),
-    url(r'^list/$', 'list', name='list'),
+    url(r'^shared_files/$', 'shared_files', name='shared_files'),
     url(r'^register/$', 'register', name='register'),
     url(r'^login/$', 'user_login', name='login'),
     url(r'^profile/$', 'profile', name='profile'),
