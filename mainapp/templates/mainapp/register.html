@@ -13,8 +13,7 @@
         {% else %}
         <strong>Register, now!</strong><br />
 
-        <form id="user_form" method="post" action="/register/"
-                enctype="multipart/form-data">
+        <form id="user_form" method="post" action={% url 'register' %} enctype="multipart/form-data">
 
             {% csrf_token %}
             {{ user_form.as_p }}
