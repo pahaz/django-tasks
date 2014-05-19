@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'Application',
     'Book',
     'loginsys',
+    'debug_toolbar',
     # 'south',
 )
 
@@ -50,12 +51,25 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+    # "complaints.context_processors.complaints",
 )
 
 ROOT_URLCONF = 'Project_Django_Course.urls'
 
 WSGI_APPLICATION = 'Project_Django_Course.wsgi.application'
 
+#INTERNAL_IPS = ('127.0.0.1', '10.97.16.119',)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
@@ -86,7 +100,8 @@ USE_TZ = True
 
 LOGIN_URL = '/auth/login/'
 
-STATIC_URL = '/Project_Django_Course/'
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -99,8 +114,6 @@ TEMPLATE_DIRS = (
     #'C:/Pycharm/PycharmProjects/Project_Django_Course/Book/loginsys/templates/',
 )
 
-# MEDIA_ROOT = 'C:/Pycharm/PycharmProjects/Project_Django_Course/Book/static'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # AUTH_USER_MODEL = 'Book.MyType'
-
-

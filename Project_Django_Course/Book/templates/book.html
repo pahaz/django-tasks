@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-
 {% extends 'main.html' %}
 {% load staticfiles  %}
 
@@ -9,21 +7,19 @@
     <div class="large-push-1">
         <h5>{{book.authors.get}}</h5>
         <p>
-            {% with book.photo as photo %}
-                    <img src="{% static photo %}" width ="200px" height="200px">
-            {% endwith %}
+            <img src="{{ MEDIA_URL }}{{ book.photo }}" width ="200px" height="200px">
         </p>
             <h6> Цена: {{ book.price }} рублей</h6>
             {% if username %}
-                <form action="books/get/{{ book.id }}/add_in_list/" method="post">
-                <input type="submit" class="button" value="Добавить в корзину">
-                    {% csrf_token %}    aasasas
-                {% if error %}
-                    <label class="error">
-                        У вас уже есть эта книга
-                    </label>
-                {% endif %}
-            </form>
+                <form action="/books/get/{{ book.id }}/add_in_list/" method="POST">
+                    <input type="submit" class="button" value="Добавить в корзину">
+                    {% csrf_token %}
+                    {% if error %}
+                        <label class="error">
+                            У вас уже есть эта книга
+                        </label>
+                    {% endif %}
+                 </form>
             {% endif %}
     </div>
     <hr>

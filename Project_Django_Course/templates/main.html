@@ -6,6 +6,12 @@
 <head>
     <title>Django</title>
     <link rel="stylesheet" type="text/css" href="{% static "css/foundation.css" %}">
+    <script type="text/javascript" src="http://yandex.st/jquery/1.6.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("body").css("display","none").fadeIn("slow");
+        });
+    </script>
 </head>
 <body>
     <nav class="top-bar">

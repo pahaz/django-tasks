@@ -1,7 +1,7 @@
-<!DOCTYPE html>
-
 {% extends 'main.html' %}
 
 {% block library %}
-    Спасибо за покупку !
+    {% if username %}
+        <h3>Вы добавили книгу в корзину !</h3>
+    {% endif %}
 {% endblock %}

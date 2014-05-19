@@ -20,6 +20,7 @@
       <list>
         <option value="$MODULE_DIR$/templates" />
         <option value="$MODULE_DIR$/loginsys/templates" />
+        <option value="$MODULE_DIR$/Book/templates" />
       </list>
     </option>
   </component>
