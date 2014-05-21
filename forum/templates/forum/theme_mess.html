@@ -1,0 +1,28 @@
+{% extends "forum/masterpage.html" %}
+
+{% block content %}
+<h1>{{ theme.name }}</h1>
+
+{% if theme.message_set.all|length == 0 %}
+    <h1>There is no message yet :(</h1>
+{% endif %}
+    <table id='messages'>
+    {% for message in theme.message_set.all %}
+        <tr>
+        <td class='mes_author'><p>{{ message.author }}</p></td><td class='mes_date'><p>{{ message.created }}</p></td><td class='mes_text'><p>{{ message.text }}</p></td>
+            {% if message.author == user %}
+                <td class='other'><a href='{% url "forum:edit_mess" theme.pk message.pk %}'>Edit</a>
+                <a href='{% url "forum:delete_mess" theme.pk message.pk %}'>Delete</a></td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+
+{% if user.is_authenticated %}
+    <form id='send_mess' action="{% url 'forum:add_message' theme.pk %}" method = 'post'>
+        {% csrf_token %}
+        <input type = 'text' name = 'new_message_text' id = 'new_message_text_input' maxlength = '1000' size = '100' required />
+        <input type = 'submit' name = 'send_new_message' id = 'send_new_message_button' value = 'Send' />
+    </form>
+{% endif %}
+{% endblock %}

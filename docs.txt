@@ -1,0 +1,4 @@
+superuser:
+login: admin
+password: admin
+email: admin@admin.admin

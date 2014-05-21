@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Forum</title>
+</head>
+<body>
+
+{% load staticfiles %}
+<link rel = 'stylesheet' type = 'text/css' href = '{% static "forum/style.css" %}' />
+
+
+<div id='content'>
+    <div id='header'>
+        <div id='home'><a href = '{% url "forum:index" %}'>Home</a></div>
+
+        {% if user.is_authenticated %}
+            <div id='hello'>Hello, <b>{{ user.username }}</b>!</div>
+            <div id='logout'><a href = '{% url "forum:logout" %}'>Log Out</a></div>
+        {% else %}
+            <div id='login'><a href = '{% url "forum:login_page" %}'>Log In</a></div>
+            <div id='registration'><a href = '{% url "forum:register" %}'>Register</a></div>
+        {% endif %}
+    </div>
+
+    <div id='forum_content'>
+        {% block content %}
+        {% endblock %}
+    </div>
+</div>
+
+</body>
+</html>
