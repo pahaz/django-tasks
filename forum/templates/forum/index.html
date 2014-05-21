@@ -1,0 +1,36 @@
+{% extends "forum/masterpage.html" %}
+
+{% block content %}
+
+{% if themes %}
+    <table id='themes'>
+        {% for theme in themes %}
+            <tr class='theme'>
+                <td class='theme_name'><a href="{% url 'forum:theme_mess' theme.pk %}">{{ theme.name }}</a></td><td class='theme_author'><a href="{% url 'forum:theme_mess' theme.pk %}">{{ theme.author }}</a></td><td class='theme_date'><a href="{% url 'forum:theme_mess' theme.pk %}">{{ theme.created }}</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>Here is no themes!</p>
+{% endif %}
+
+<span class="step-links">
+    {% if themes.has_previous %}
+        <a href="{{ themes.previous_page_number }}">&laquo; back</a>
+    {% endif %}
+    <span class="current"> {{ themes.number }} of {{ themes.paginator.num_pages }} </span>
+    {% if themes.has_next %}
+        <a href="{{ themes.next_page_number }}">next &raquo;</a>
+    {% endif %}
+</span>
+
+{% if user.is_authenticated %}
+    <form action="{% url 'forum:add_theme' %}" method = 'post' id='create_theme'>
+        {% csrf_token %}
+        <input type = 'text' name = 'new_theme_name' id = 'new_theme_name_input' maxlength = '100' size = '100' required maxlength='100'/>
+        <input type = 'submit' name = 'send_new_theme' id = 'send_new_theme_button' value = 'Create Theme' />
+    </form>
+{% endif %}
+
+
+{% endblock %}

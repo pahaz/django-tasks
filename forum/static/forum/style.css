@@ -1,0 +1,248 @@
+body {
+    margin: 0px;
+    padding: 0px;
+}
+
+div#content {
+    position: absolute;
+    width: 824px;
+    left: 50%;
+    margin-left: -412px;
+}
+
+div#header {
+    height: 50px;
+}
+
+div#home, div#registration, div#login, div#logout, div#hello {
+    float: left;
+    width: 266px;
+    text-align: center;
+}
+
+div#home a {
+    top: 0px;
+    font-family: Roboco, sans-serif;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    padding: 13px 99px 5px 99px;
+    width: 266px;
+    height: 50px;
+    background: #FF4500;
+}
+
+div#registration a {
+    top: 0px;
+    font-family: Roboco, sans-serif;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    padding: 13px 99px 5px 99px;
+    width: 266px;
+    height: 50px;
+    background: #B3EE3A;
+}
+
+div#login a, div#logout a {
+    top: 0px;
+    font-family: Roboco, sans-serif;
+    text-decoration: none;
+    font-size: 25px;
+    color: white;
+    padding: 13px 98px 5px 97px;
+    width: 266px;
+    height: 50px;
+    background: #FFA500;
+}
+
+div#logout a {
+    padding: 13px 88px 5px 89px;
+}
+
+div#hello {
+    top: 0px;
+    font-family: Roboco, sans-serif;
+    text-decoration: none;
+    font-size: 25px;
+    color: #00CD00;
+    width: 290px;
+    height: 50px;
+    background: white;
+}
+
+div#login a:hover, div#logout a:hover {
+    background: #FF7F00;
+}
+
+div#home a:hover {
+    background: #FF0000;
+}
+
+div#registration a:hover {
+    background: #9ACD32;
+}
+
+table#themes {
+    display: block;
+    font-family: Roboco, sans-serif;
+    font-size: 20px;
+    width: 824px;
+}
+
+tr.theme {
+    display: block;
+    width: 824px;
+}
+
+td.theme_name {
+    padding: 0px;
+    margin: 0px;
+    width: 400px;
+    word-wrap: break-word;
+}
+
+td.theme_name a {
+    width: 400px;
+    padding: 5px 0px;
+    display: block;
+    color: #8B4726;
+    text-decoration: none;
+}
+
+td.theme_author {
+    padding: 0px;
+    margin: 0px;
+    width: 150px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+td.theme_author a {
+    width: 150px;
+    padding: 5px 0px;
+    display: block;
+    color: #8B4726;
+    text-decoration: none;
+}
+
+td.theme_date {
+    padding: 0px;
+    margin: 0px;
+    width: 274px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+td.theme_date a {
+    width: 274px;
+    padding: 5px 0px;
+    display: block;
+    color: #8B4726;
+    text-decoration: none;
+}
+
+tr.theme:hover {
+    background: #FFFACD;
+}
+
+span.step-links {
+    display: block;
+    width: 824px;
+    text-align: center;
+    font-family: Roboco, sans-serif;
+    font-size: 15px;
+    color: black;
+}
+
+span.step-links a {
+    text-decoration: none;
+}
+
+form#create_theme {
+    width: 824px;
+    padding: 10px 30px;
+}
+
+form#login_form, form#register_form, form#edit_mess, form#send_mess {
+    width: 824px;
+    text-align: center;
+    font-family: Roboco, sans-serif;
+    font-size: 20px;
+    color: #8B4726;
+}
+
+form#login_form input, form#register_form input, form#edit_mess textarea, form#edit_mess input, form#send_mess input {
+    border-color: #8B4726;
+}
+
+form#login_form input#login_button, form#register_form input#send_logpass_button, form#edit_mess input#send_new_message_button, form#send_mess input#send_new_message_button {
+    background: #CD6839;
+    color: white;
+    font-size: 15px;
+    font-family: Roboco, sans-serif;
+    font-weight: 600;
+}
+
+form#login_form input#login_button:hover, form#register_form input#send_logpass_button:hover, form#edit_mess input#send_new_message_button:hover, form#send_mess input#send_new_message_button:hover {
+    background: #8B4726;
+}
+
+form#register_form span.helptext {
+    display: block;
+    font-size: 13px;
+    color: black;
+}
+
+.errorlist {
+    color:red;
+}
+
+h1 {
+    color: #8B4726;
+    width:824px;
+    text-align: center;
+    display: block;
+    width: 824px;
+    word-wrap: break-word;
+}
+
+#messages {
+    width:824px;
+    font-family: Roboco, sans-serif;
+}
+
+#messages td {
+    padding: 10px 0px;
+}
+
+.mes_author p {
+    width: 100px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.mes_date p {
+    width: 100px;
+    text-align: center;
+    word-wrap: break-word;
+}
+
+.mes_text p  {
+    width: 530px;
+    padding-left: 20px;
+    word-wrap: break-word;
+}
+
+td.other {
+    width: 74px;
+    text-align: center;
+}
+
+#messages tr:nth-child(2n) {
+    background: #FFD39B;
+}
+
+#messages tr:nth-child(2n+1) {
+    background: #FFE7BA;
+}

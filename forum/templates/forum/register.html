@@ -1,0 +1,13 @@
+{% extends "forum/masterpage.html" %}
+
+{% block content %}
+    {% if error_mess %}
+        <p class = 'error'>{{ error_mess }}</p>
+    {% endif %}
+
+    <form id='register_form' action="" method = 'post'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type = 'submit' name = 'send_logpass' id = 'send_logpass_button' value = 'Log In' />
+    </form>
+{% endblock %}
