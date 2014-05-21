@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Музычка — Регистрация/Вход</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="mainTitle">МУЗЫЧКА<span style="color: #008ace;">.РУ</span></div>
+    <div class="logRegBlock">
+        <div class="regBlock">
+            <div class="blockTitle">Регистрация</div>
+            <form id="register_form" method="post" action="{%  url 'register' %}">
+                {% csrf_token %}
+                {{ register_form.as_p }}
+                <input type="submit" name="submit" value="Зарегистрироваться" />
+            </form>
+        </div>
+        <div class="logBlock">
+            <div class="blockTitle">Вход</div>
+            <form id="login_form" method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                {{ login_form.as_p }}
+                <input type="submit" name="submit" value="Войти" />
+            </form>
+        </div>
+        <div style="clear: both"></div>
+    </div>
+</body>
+</html>

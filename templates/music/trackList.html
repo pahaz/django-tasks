@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+{% load tz %}
+<html>
+    <head>
+        <title>Музычка — {% if trackListType == 'all' %}Все треки{% else %}Последние треки{% endif %}</title>
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/static/font-awesome-4.0.3/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/static/css/styles.css">
+        <script src="/static/js/jquery-2.1.1.min.js"></script>
+        <script src="/static/js/player.js"></script>
+    </head>
+    <script>
+        var tracks = {{ tracksJson|safe }},
+            trackListType = "{{ trackListType }}";
+    </script>
+    <body>
+        <div class="userBar">
+            <ul>
+                {% if trackListType == 'all' %}
+                    <li id="activeLi">ВСЕ</li>
+                    <li><a href="{% url 'history' %}">ПОСЛЕДНИЕ</a></li>
+                {% else %}
+                    <li><a href="/">ВСЕ</a></li>
+                    <li id="activeLi">ПОСЛЕДНИЕ</li>
+                {% endif %}
+            </ul>
+            {% comment %}<div class="searchBlock">
+                <input type="text" placeholder="Поиск">
+                <div class="searchButton">
+                    <i class="fa fa-search"></i>
+                </div>
+            </div>
+            <div class="controlsBlock">
+                <i class="fa fa-list" title="Последние треки"></i>
+            </div>{% endcomment %}
+            <div class="userNameBlock">
+                {% if user.is_authenticated %}
+                    <div class="logOutButton">
+                        <a href="{% url 'logout' %}"><i class="fa fa-times"></i></a>
+                    </div>
+                    {{ username }}
+                {% else %}
+                    <i class="fa fa-user"></i> <a href="{% url 'register' %}">Войти</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="trackList">
+            {% if tracks|length == 0 %}
+                <span class="infoMessage">
+                    {% if trackListType == 'all' %}
+                        В системе пока нет музыки
+                    {% else %}
+                        Вы ещё не слушали музыку
+                    {% endif %}
+                </span>
+            {% else %}
+                {% for track in tracks %}
+                    <div class="track" id="track{{ forloop.counter0 }}">
+                        <div class="progressBar"></div>
+                        <div class="playbackButton">
+                            <i class="fa fa-play"></i>
+                        </div>
+                        <div class="artistName">
+                            {{ track.artist }}
+                        </div>
+                        <div class="trackName">
+                            — {{ track.title }}
+                        </div>
+                        <div class="listenDate">
+							{% if trackListType == 'history' %}
+								Последний раз играл: {{ track.listen_date|date:"d.m.Y, H:i" }}
+							{% endif %}
+                        </div>
+                        <div class="timer">
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </body>
+</html>
+
