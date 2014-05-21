@@ -4,10 +4,10 @@
 2. Зарегистрированному пользователю доступна вкладка "Последние"
 
 Вот что видит случайный пользователь:
-!https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen1.png
+![]https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen1.png
 
 Если он нажмёт "Войти" или "Последние", то увидит совмещённую страницу входа/регистрации
-!https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen2.png
+![]https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen2.png
 
 Когда вход выполнен, пользователь может посмотреть последние прослушанные треки
-!https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen3.png
+![]https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen3.png
