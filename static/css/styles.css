@@ -1,0 +1,243 @@
+BODY, UL, LI {
+    margin: 0;
+    padding: 0;
+    background: url("/static/img/bg.png");
+}
+
+/* USER BAR */
+.userBar {
+    height: 20px;
+    padding: 18px;
+    margin-top: 5px;
+}
+.userBar ul a {
+    text-decoration: none;
+    color: #333;
+    opacity: .9;
+}
+.userBar ul a:active {
+    opacity: 1;
+}
+.userBar ul li {
+    display: block;
+    margin: 15px 12px 0 5px;
+    font: bold 18px 'Open Sans';
+    cursor: pointer;
+    float: left;
+}
+.userBar ul li:hover {
+    color: #00abef;
+}
+.userBar ul li#activeLi {
+    color: #008ace;
+    cursor: default;
+}
+.searchBlock input {
+    width: 300px;
+    height: 26px;
+    margin-top: -4px;
+    padding: 4px 4px 4px 8px;
+    background: #fefefe;
+    border: 1px solid #cecece;
+    font: 18px Consolas;
+    float: left;
+}
+.searchButton {
+    width: 50px;
+    height: 23px;
+    padding: 7px 4px 4px 4px;
+    margin-top: -4px;
+    border: 1px solid #cecece;
+    border-left: 0;
+    background: #e0e0e0;
+    color: #666;
+    text-align: center;
+    font-size: 19px;
+    cursor: pointer;
+    float: left;
+}
+.searchButton:active {
+    box-shadow: inset 0 1px 4px #d5d5d5;
+    color: #333;
+}
+.controlsBlock {
+    margin-left: 20px;
+    font-size: 33px;
+    float: left;
+}
+.controlsBlock i {
+    opacity: .5;
+    cursor: pointer;
+}
+.controlsBlock i:active {
+    opacity: .9;
+}
+.userNameBlock {
+    margin: 12px 5px 0 0;
+    font: bold 19px 'Open Sans';
+    float: right;
+}
+.userNameBlock a {
+    margin-left: 4px;
+    color: #333;
+}
+.userNameBlock i {
+    opacity: .5;
+}
+.userNameBlock:active i {
+    opacity: 1;
+}
+.logOutButton {
+    font-size: 19px;
+    cursor: pointer;
+    opacity: .5;
+    float: right;
+}
+.logOutButton:active {
+    opacity: .9;
+}
+
+/* LOGIN/REGISTER */
+.mainTitle {
+    margin-top: 100px;
+    text-align: center;
+    font: bold 68px 'Open Sans';
+    color: #666;
+}
+.logRegBlock {
+    width: 641px;
+    margin: 50px auto;
+    background: #fefefe;
+    border-radius: 3px;
+    border: 1px solid #cecece;
+    box-shadow: inset 0 -1px 1px #b2b2b2;
+}
+.regBlock {
+    border-right: 1px dotted #cecece;
+}
+.regBlock, .logBlock {
+    width: 260px;
+    float: left;
+    padding: 30px 30px 50px 30px;
+}
+.logRegBlock .blockTitle {
+    height: 36px;
+    font: 26px 'Open Sans';
+    color: #999;
+}
+.logRegBlock label {
+    display: block;
+    font: bold 14px 'Open Sans';
+    color: #666;
+}
+.logRegBlock input {
+    width: 250px;
+    height: 20px;
+    padding: 2px 2px 2px 4px;
+    font: 15px Arial;
+    border: 1px solid #cecece;
+    border-radius: 2px;
+}
+.logRegBlock input[type="submit"] {
+    width: 260px;
+    padding: 4px 4px 6px 4px;
+    height: 35px;
+    font: bold 14px 'Open Sans';
+    cursor: pointer;
+    opacity: .8;
+}
+.logRegBlock input[type="submit"]:active {
+    opacity: 1;
+}
+.regBlock input:focus {
+    border: 1px solid #03bd60;
+}
+.regBlock input[type="submit"] {
+    background: #03bd60;
+    color: #fff;
+}
+.logBlock input[type="submit"] {
+    background: #008ace;
+    color: #fff;
+}
+.errorlist {
+    list-style: none;
+}
+ul.errorlist li {
+    color: #e65980;
+    font: 13px Arial;
+    background: #fefefe;
+    margin-bottom: -20px;
+}
+
+/* TRACKS */
+.trackList {
+    margin: 20px;
+}
+.infoMessage {
+    font: 20px 'Open Sans';
+    color: #999;
+}
+.track {
+    height: 70px;
+    padding: 18px;
+    cursor: pointer;
+    color: #333;
+    border-bottom: 1px solid #ccc;
+    background: #fefefe;
+    z-index: 0;
+}
+.track:hover {
+    background: #f6f6f6;
+    color: #000;
+}
+.track.playing {
+    color: #008ace;
+}
+.progressBar {
+    height: 106px;
+    position: absolute;
+    margin: -18px 0 0 -18px;
+    background: #add8e6;
+    opacity: .4;
+    z-index: 1;
+}
+.playbackButton {
+    width: 64px;
+    height: 64px;
+    position: relative;
+    font-size: 64px;
+    float: left;
+    z-index: 2;
+}
+.artistName {
+    position: relative;
+    display: inline-block;
+    margin: 18px 5px 0 18px;
+    font: bold 24px 'Open Sans';
+    z-index: 2;
+}
+.trackName {
+    position: relative;
+    display: inline-block;
+    font: 24px 'Open Sans';
+    font-weight: 200;
+    z-index: 2;
+}
+.listenDate {
+    position: relative;
+    display: inline-block;
+    margin-left: 20px;
+    font: 12px 'Open Sans';
+    color: #cecece;
+}
+.timer {
+    display: inline-block;
+    float: right;
+    margin: 20px 5px 0 0;
+    font: 24px 'Open Sans';
+    font-weight: 200;
+    color: #999;
+    z-index: 2;
+}
+
