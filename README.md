@@ -4,7 +4,7 @@
 2. Зарегистрированному пользователю доступна вкладка "Последние"
 
 Вот что видит случайный пользователь:
-![]https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen1.png
+![random]https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen1.png
 
 Если он нажмёт "Войти" или "Последние", то увидит совмещённую страницу входа/регистрации
 ![]https://raw.githubusercontent.com/mopdobopot/django-tasks/master/static/img/screen2.png
