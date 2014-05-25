@@ -18,7 +18,7 @@ class Author(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=40)
     email = models.EmailField(blank=True, verbose_name='e-mail')
-    photo = models.ImageField(upload_to='Book/static/Photo_authors', blank=True)
+    photo = models.ImageField(upload_to='/media/Photo_Books/', blank=True)
 
 
     def __str__(self):
