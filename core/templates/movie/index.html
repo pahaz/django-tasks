@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+{% if user.is_authenticated %}
+Hello {{ user.username }}
+{% endif %}
+<hr>
+{% for x in items %}
+{{ x.film }}<br>
+{{ x.info }}<br>
+{{ x.price }}<br>
+<img src="{{ MEDIA_URL }}{{ x.poster }}" width="150" height="200">
+<hr>
+{% endfor %}
+</body>
+</html>
