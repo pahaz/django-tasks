@@ -37,7 +37,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Application',
     'Book',
     'loginsys',
     'debug_toolbar',
@@ -69,7 +68,7 @@ ROOT_URLCONF = 'Project_Django_Course.urls'
 
 WSGI_APPLICATION = 'Project_Django_Course.wsgi.application'
 
-# INTERNAL_IPS = ('127.0.0.1', '192.168.1.3',)
+INTERNAL_IPS = ('127.0.0.1', '192.168.1.3',)
 
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
