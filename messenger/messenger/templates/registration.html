@@ -1,0 +1,22 @@
+{%  extends 'base.html' %}
+{% block body %}
+    <div class='form'>
+    <h3>Please, Login:</h3>
+    <form action="" method="POST"> {%  csrf_token %}
+        <fieldset>
+    <p>Username:</p>
+    <p>{{ form.username }}</p>
+    <div class="required"> {{  form.errors.username }}</div>
+    <p>Password:</p>
+    <p>{{ form.password1 }}</p>
+    <div class="required"> {{  form.errors.password1 }}</div>
+    <p>Password Confirmation:</p>
+    <p>{{ form.password2 }}</p>
+    <div class="required"> {{  form.errors.password2 }}</div>
+    <input type='submit' value="Register" class="btn">
+     <a href="{% url 'chat.views.login'  %}" class="btn btn-link" >back</a>
+
+        </fieldset>
+    </form>
+    </div>
+{% endblock %}

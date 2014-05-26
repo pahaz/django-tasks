@@ -1,0 +1,14 @@
+{%  extends 'base.html' %}
+{% block body %}
+
+    <h3>{{ user|capfirst }}, load your avatar!</h3>
+    <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
+    <img src="/{{ MEDIA_URL }}{{ user.avatar }}">
+
+        <br>
+    {{ form.as_p }}
+        <br>
+    <input type='submit' value="Load" class="btn">
+    </form>
+    <a href="{% url 'chat.views.contacts' %}" class="btn btn-link" >back</a>
+{% endblock %}

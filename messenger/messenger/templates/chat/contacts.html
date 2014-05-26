@@ -1,0 +1,119 @@
+{%  extends 'base.html' %}
+{% block body %}
+     {% if user.avatar  %}
+    <img src="/{{ MEDIA_URL }}{{ user.avatar }}" width="60px" class="img-circle">
+    {% endif %}
+    Hi there, <a href='{% url 'chat.views.account' %}'>{{ user|capfirst }}</a>
+    {% if user.status %}
+     <div class='status'>
+            Status:
+        <div class="label label-info"> {{ user.status }} </div>
+     </div>
+{% endif %}
+
+    {% if knokings %}
+    <div class="contacts">
+     <h1> Knoking People </h1>
+    <br>
+    {% for i in knokings%}
+
+        <div class='user'>
+                {% if i.avatar %}
+            <img src="/{{ MEDIA_URL }}{{ i.avatar }}" width="100px" class="img-polaroid">
+            {% endif %}
+            <h3>{{ i }}</h3>
+            <div class="user_info">
+             {%  if i.status %}
+             <div class="label label-info">{{ i.status }}</div>
+            {% endif %}
+            </div>
+            <div class="add_to_friends">
+            <a href="{% url 'chat.views.reject' i.username %}" class="btn btn-danger"><i class="icon-minus icon-white"> </i>  Reject </a>
+            <a href="{% url 'chat.views.add_to_friends' i.username %}" class="btn btn-success"><i class="icon-ok icon-white"> </i>  Accept </a>
+            </div>
+        </div>
+      {% endfor %}
+     </div>
+    {% endif %}
+
+
+    {% if friends %}
+     <div class="contacts">
+     <h1> Your Friends </h1>
+    <br>
+    {% for i in friends %}
+        <div class='user'>
+            {% if i.avatar and not i in waiting %}
+           <a href="/{% url 'chat.views.chat_with' i.username %}">
+           <div class="glow">
+                <img src="/{{ MEDIA_URL }}{{ i.avatar }}" width="100px" class="img-polaroid">
+               </div>
+           </a>
+            {% else %}
+                <img src="/{{ MEDIA_URL }}{{ i.avatar }}" width="100px" class="img-polaroid">
+            {% endif %}
+            <h3>{{ i }}</h3>
+            <div class="user_info">
+             {%  if i.status %}
+            <div class="label label-info">{{ i.status }}</div>
+            {% endif %}
+            </div>
+
+        <div class="add_to_friends">
+
+        <a href="{% url 'chat.views.remove_from_friends' i.username %}" class="btn btn-danger"><i class="icon-remove icon-white"> </i>  Remove </a>
+         {% if i in waiting %}
+            <br>
+            <div class="label label-info">waiting </div>
+          {% else %}
+
+            {% for k, v in unread %}
+                  {% if k == i.id and v > 0 %}
+                   <div class="label label-warning">
+                   {{ v }}
+                       </div>
+                   {% endif %}
+
+             {% endfor %}
+
+         {% endif %}
+
+        </div>
+        </div>
+      {% endfor %}
+     </div>
+    {% endif %}
+    <div class="contacts">
+    <h1> Global Users </h1>
+    <br>
+    {% if all_friends %}
+        <div class="text-info"> <h2>You have added all friends. <i class="icon-thumbs-up"></i></h2></div>
+    {% endif %}
+    {% for i in users %}
+        {% if i != user %}
+            {% if not i in friends %}
+        <div class='user'>
+            {% if i.avatar %}
+            <img src="/{{ MEDIA_URL }}{{ i.avatar }}" width="100px" class="img-polaroid">
+
+            {% endif %}
+            <h3>{{ i }}</h3>
+            <div class="user_info">
+            {%  if i.status %}
+            <div class="label label-info">{{ i.status }}</div>
+            {% endif %}
+            </div>
+        <div class="add_to_friends">
+        <a href="{% url 'chat.views.add_to_friends' i.username %}" class="btn btn-success"> <i class="icon-plus icon-white"> </i>  Add to friends</a>
+
+
+        </div>
+        </div>
+           {% endif %}
+        {% endif %}
+    {% endfor %}
+    </div>
+
+
+    <a href="{% url 'chat.views.logout' %}" class="btn btn-link" >logout</a>
+{% endblock %}
