@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from itertools import chain
 from django.contrib.auth.forms import  UserCreationForm, AuthenticationForm
 from chat.forms import RegistrationForm, InfoForm
 from django.core.urlresolvers import reverse
@@ -7,7 +8,7 @@ from django.http.response import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 import datetime
 from django.core.exceptions import ObjectDoesNotExist
-from chat.models import ChatUser, UserFriends, Message
+from chat.models import ChatUser, Message
 from django.contrib.auth.decorators import login_required
 
 
@@ -71,30 +72,27 @@ def contacts(request):
     user = request.user
     all_friends = False
     users = ChatUser.objects.all()
-    friends = UserFriends(user.id).friend_list.all()
+    friends = user.friend_list.all()
+    waitings =  user.waiting_list.all()
+    friend_set = list(chain(friends, waitings))
+
     if str(friends) == str(users.exclude(id=user.id)):
-       all_friends = True
+        all_friends = True
     knocking = []
     waiting = []
     unread = {}
     for u in users:
-        if (not u in UserFriends(user.id).friend_list.all() and
-            user in UserFriends(u.id).friend_list.all()):
-            knocking.append(u)
-        if (u in UserFriends(user.id).friend_list.all() and
-            not user in UserFriends(u.id).friend_list.all()):
-            waiting.append(u)
+        if user in u.waiting_list.all():
+           knocking.append(u)
+        if u in user.waiting_list.all():
+           waiting.append(u)
         messages_unread = Message.objects.filter(to_user=user, from_user=u, is_read=False)
         unread[u.id] = 0
         for i in messages_unread:
             unread[u.id] += 1
-
-
-
-
     return render(request,  'chat/contacts.html', { 'users': users,
                                                     'user': user,
-                                                    'friends': friends,
+                                                    'friends': friend_set,
                                                     'knokings': knocking,
                                                     'waiting': waiting,
                                                     'all_friends': all_friends,
@@ -105,16 +103,23 @@ def contacts(request):
 def add_to_friends(request, name):
     user = request.user
     friend = ChatUser.objects.get(username=name)
-    UserFriends(user.id).friend_list.add(ChatUser(friend.id))
-    return HttpResponseRedirect('/contacts')
+    if user in friend.waiting_list.all():
+        friend.friend_list.add(user)
+        friend.waiting_list.remove(user)
+    elif friend in user.waiting_list.all():
+        user.friend_list.add(friend)
+        user.waiting_list.remove(friend)
+    else:
+        user.waiting_list.add(friend)
+    return HttpResponseRedirect(reverse('chat.views.contacts'))
 
 
 @login_required
 def remove_from_friends(request, name):
     user = request.user
     friend = ChatUser.objects.get(username=name)
-    UserFriends(user.id).friend_list.remove(ChatUser(friend.id))
-    UserFriends(friend.id).friend_list.remove(ChatUser(user.id))
+    user.friend_list.remove(friend)
+    user.waiting_list.remove(friend)
     return HttpResponseRedirect(reverse('chat.views.contacts'))
 
 
@@ -122,7 +127,7 @@ def remove_from_friends(request, name):
 def reject(request, name):
     user = request.user
     friend = ChatUser.objects.get(username=name)
-    UserFriends(friend.id).friend_list.remove(ChatUser(user.id))
+    friend.waiting_list.remove(user)
     return HttpResponseRedirect(reverse('chat.views.contacts'))
 
 
@@ -133,8 +138,7 @@ def chat_with(request, name):
         friend = ChatUser.objects.get(username=name)
     except ObjectDoesNotExist:
          return HttpResponseRedirect(reverse('chat.views.contacts'))
-    if (not friend in UserFriends(user.id).friend_list.all() or
-         not user in UserFriends(friend.id).friend_list.all()):
+    if not friend in user.friend_list.all():
         return HttpResponseRedirect(reverse('chat.views.contacts'))
     messages_unread = Message.objects.filter(to_user=user, from_user=friend, is_read=False)
     for mes in messages_unread:
@@ -154,9 +158,10 @@ def chat_with(request, name):
                Message.objects.filter(to_user=user, from_user=friend)
 
 
-    return render(request,  'chat/chat.html', {'user': user,
-                                               'friend': friend,
-                                               'messages': messages})
+    return render(request,  'chat/chat.html',{'user': user,
+                                           'friend': friend,
+                                           'messages': messages}
+ )
 
 @login_required
 def unread_with(request, name):

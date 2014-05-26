@@ -38,7 +38,8 @@ class ChatUser(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
     objects = ChatUserManager()
-
+    friend_list = models.ManyToManyField("self")
+    waiting_list = models.ManyToManyField("self", symmetrical=False)
     USERNAME_FIELD = 'username'
     #REQUIRED_FIELDS = ['date_of_birth']
 
@@ -69,10 +70,6 @@ class ChatUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-
-
-class UserFriends(models.Model):
-    friend_list = models.ManyToManyField(ChatUser)
 
 
 class Message(models.Model):
