@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block library %}
+    <div class="large-offset-3 large-6 columns">
+         <form action="/my_books/choice/accepted/" method="POST">
+             {% csrf_token %}
+            <label for="id_card">Номер карты:</label>
+            <input type="text" name="id_card" id="id_card">
+        <input class="button" type="submit" value="Подтвердить покупку" >
+        </form>
+    </div>
+{% endblock %}

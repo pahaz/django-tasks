@@ -1,0 +1,37 @@
+{% extends 'main.html' %}
+{% load staticfiles %}
+
+{% block library %}
+    <div class="large-3 columns">
+    {% for book in books %}
+        <h4><a href="/books/get/{{ book.id }}/">{{ book }} </a></h4>
+        <p> Автор: {{ book.authors.get }}</p>
+            <img src="{{ MEDIA_URL }}{{ book.photo }}" width ="200px" height="200px">
+        <div class="large-push-11"><a href="/books/add_like/{{ book.id }}/"><img src="{% static 'like.jpg' %}" width ="25px" height="25px"></a>{{ book.likes }}</div>
+        <hr>
+    {% endfor %}
+    </div>
+    <div class="row">
+        <div class="large-6 large-offset-2 columns">
+            <ul class="pagination">
+                {% if books.has_previous %}
+                    <li class="arrow"><a href="/page/{{ books.previous_page_number }}/">&laquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                {% endif %}
+                {% for page in books.paginator.page_range %}
+                    {% if page == books.number %}
+                        <li class="current"><a href="/page/{{ page }}/">{{ page }}</a></li>
+                    {% else %}
+                        <li><a href="/page/{{ page }}/">{{ page }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% if books.has_next %}
+                    <li class="arrow"><a href="/page/{{ books.next_page_number }}/">&raquo;</a></li>
+                {% else %}
+                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

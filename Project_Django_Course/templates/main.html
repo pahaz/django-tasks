@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>Django</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/foundation.css" %}">
+    <script type="text/javascript" src="http://yandex.st/jquery/1.6.2/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("body").css("display","none").fadeIn("slow");
+        });
+    </script>
+</head>
+<body>
+    <nav class="top-bar">
+        <section class="top-bar-section">
+                {% if username %}
+                    <ul class="right">
+                        <li class="active"><a href="/auth/logout/">Выйти ({{ username }})</a></li>
+                    </ul>
+                    <ul class="right">
+                        <li><a href="/my_books/">Мои покупки</a></li>
+                    </ul>
+                {% else %}
+                    <ul class="right"><li><a href="/auth/login/">Войти</a></li></ul>
+                {% endif %}
+        </section>
+       </nav>
+    <h1><a href="/"> Little Library by Savichev </a></h1>
+    <div class="row">
+    {% block library %} {% endblock %}
+    {% block login %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block library %}
+    {% if username %}
+    <title>Мои Книги</title>
+    {% for book in books %}
+    <h4> {{ book.title }}</h4>
+    <h5> Автор: {{book.authors.get}}</h5>
+        <p>
+                <img src="{{ MEDIA_URL }}{{ book.photo }}" width ="200px" height="200px">
+        </p>
+    <hr>
+    {% endfor %}
+        <h3>Вы приобрели книг на сумму: {{ sum }} рублей</h3>
+        <h4>Способ оплаты:</h4>
+        {% for pay in Pays %}
+            <h5> {{ pay }} </h5>
+            <a href="/my_books/choice/"><input type="submit" class="button" value="Выбрать" ></a>
+        {% endfor %}
+    {% endif %}
+{% endblock %}
