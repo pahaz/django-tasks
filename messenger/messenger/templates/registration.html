@@ -14,7 +14,7 @@
     <p>{{ form.password2 }}</p>
     <div class="required"> {{  form.errors.password2 }}</div>
     <input type='submit' value="Register" class="btn">
-     <a href="/login" class="btn btn-link" >back</a>
+     <a href="{% url 'chat.views.login'  %}" class="btn btn-link" >back</a>
 
         </fieldset>
     </form>

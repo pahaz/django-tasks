@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from django.core.urlresolvers import reverse
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates').replace('\\', '/'),
@@ -66,14 +67,15 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-#_PATH = os.path.abspath(os.path.dirname(__file__))
-#MEDIA_ROOT = os.path.join(_PATH, 'files', 'media')
+
+MEDIA_ROOT = 'media/'
+MEDIA_URL = 'media/'
 STATIC_URL = '/static/'
 #STATIC_ROOT = 'static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
-
+LOGIN_URL = reverse('chat.views.login')
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
 

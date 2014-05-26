@@ -15,7 +15,7 @@ class Migration(SchemaMigration):
             ('last_login', self.gf('django.db.models.fields.DateTimeField')(default=datetime.datetime.now)),
             ('username', self.gf('django.db.models.fields.CharField')(default='', unique=True, max_length=10)),
             ('status', self.gf('django.db.models.fields.CharField')(max_length=50, null=True, blank=True)),
-            ('avatar', self.gf('django.db.models.fields.files.ImageField')(default='static/avatars/noavatar.png', max_length=100, null=True, blank=True)),
+            ('avatar', self.gf('django.db.models.fields.files.ImageField')(default='media/avatars/noavatar.png', max_length=100, null=True, blank=True)),
             ('is_active', self.gf('django.db.models.fields.BooleanField')(default=True)),
             ('is_admin', self.gf('django.db.models.fields.BooleanField')(default=False)),
         ))
@@ -40,8 +40,8 @@ class Migration(SchemaMigration):
         db.create_table(u'chat_message', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('message', self.gf('django.db.models.fields.CharField')(max_length=500, null=True, blank=True)),
-            ('from_user', self.gf('django.db.models.fields.related.OneToOneField')(blank=True, related_name='from', unique=True, null=True, to=orm['chat.ChatUser'])),
-            ('to_user', self.gf('django.db.models.fields.related.OneToOneField')(blank=True, related_name='to', unique=True, null=True, to=orm['chat.ChatUser'])),
+            ('from_user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='from', null=True, to=orm['chat.ChatUser'])),
+            ('to_user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='to', null=True, to=orm['chat.ChatUser'])),
             ('is_read', self.gf('django.db.models.fields.BooleanField')(default=False)),
             ('datetime', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
         ))
@@ -65,7 +65,7 @@ class Migration(SchemaMigration):
     models = {
         u'chat.chatuser': {
             'Meta': {'object_name': 'ChatUser'},
-            'avatar': ('django.db.models.fields.files.ImageField', [], {'default': "'static/avatars/noavatar.png'", 'max_length': '100', 'null': 'True', 'blank': 'True'}),
+            'avatar': ('django.db.models.fields.files.ImageField', [], {'default': "'media/avatars/noavatar.png'", 'max_length': '100', 'null': 'True', 'blank': 'True'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_active': ('django.db.models.fields.BooleanField', [], {'default': 'True'}),
             'is_admin': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
@@ -77,11 +77,11 @@ class Migration(SchemaMigration):
         u'chat.message': {
             'Meta': {'object_name': 'Message'},
             'datetime': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
-            'from_user': ('django.db.models.fields.related.OneToOneField', [], {'blank': 'True', 'related_name': "'from'", 'unique': 'True', 'null': 'True', 'to': u"orm['chat.ChatUser']"}),
+            'from_user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'from'", 'null': 'True', 'to': u"orm['chat.ChatUser']"}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_read': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'message': ('django.db.models.fields.CharField', [], {'max_length': '500', 'null': 'True', 'blank': 'True'}),
-            'to_user': ('django.db.models.fields.related.OneToOneField', [], {'blank': 'True', 'related_name': "'to'", 'unique': 'True', 'null': 'True', 'to': u"orm['chat.ChatUser']"})
+            'to_user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'to'", 'null': 'True', 'to': u"orm['chat.ChatUser']"})
         },
         u'chat.userfriends': {
             'Meta': {'object_name': 'UserFriends'},

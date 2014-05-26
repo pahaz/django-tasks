@@ -1,9 +1,9 @@
 {%  extends 'base.html' %}
 {% block body %}
      {% if user.avatar  %}
-    <img src="/{{ user.avatar }}" width="60px" class="img-circle">
+    <img src="/{{ MEDIA_URL }}{{ user.avatar }}" width="60px" class="img-circle">
     {% endif %}
-    Hi there, <a href='/account'>{{ user|capfirst }}</a>
+    Hi there, <a href='{% url 'chat.views.account' %}'>{{ user|capfirst }}</a>
     {% if user.status %}
      <div class='status'>
             Status:
@@ -19,8 +19,7 @@
 
         <div class='user'>
                 {% if i.avatar %}
-            <img src="/{{ i.avatar }}" width="100px" class="img-polaroid">
-
+            <img src="/{{ MEDIA_URL }}{{ i.avatar }}" width="100px" class="img-polaroid">
             {% endif %}
             <h3>{{ i }}</h3>
             <div class="user_info">
@@ -29,8 +28,8 @@
             {% endif %}
             </div>
             <div class="add_to_friends">
-            <a href="/reject/{{ i.username }}" class="btn btn-danger"><i class="icon-minus icon-white"> </i>  Reject </a>
-            <a href="/add/{{ i.username }}" class="btn btn-success"><i class="icon-ok icon-white"> </i>  Accept </a>
+            <a href="{% url 'chat.views.reject' i.username %}" class="btn btn-danger"><i class="icon-minus icon-white"> </i>  Reject </a>
+            <a href="{% url 'chat.views.add_to_friends' i.username %}" class="btn btn-success"><i class="icon-ok icon-white"> </i>  Accept </a>
             </div>
         </div>
       {% endfor %}
@@ -45,13 +44,13 @@
     {% for i in friends %}
         <div class='user'>
             {% if i.avatar and not i in waiting %}
-           <a href="/chat/with/{{ i.username }}">
+           <a href="/{% url 'chat.views.chat_with' i.username %}">
            <div class="glow">
-                <img src="/{{ i.avatar }}" width="100px" class="img-polaroid">
+                <img src="/{{ MEDIA_URL }}{{ i.avatar }}" width="100px" class="img-polaroid">
                </div>
            </a>
             {% else %}
-                <img src="/{{ i.avatar }}" width="100px" class="img-polaroid">
+                <img src="/{{ MEDIA_URL }}{{ i.avatar }}" width="100px" class="img-polaroid">
             {% endif %}
             <h3>{{ i }}</h3>
             <div class="user_info">
@@ -62,7 +61,7 @@
 
         <div class="add_to_friends">
 
-        <a href="/remove/{{ i.username }}" class="btn btn-danger"><i class="icon-remove icon-white"> </i>  Remove </a>
+        <a href="{% url 'chat.views.remove_from_friends' i.username %}" class="btn btn-danger"><i class="icon-remove icon-white"> </i>  Remove </a>
          {% if i in waiting %}
             <br>
             <div class="label label-info">waiting </div>
@@ -95,7 +94,7 @@
             {% if not i in friends %}
         <div class='user'>
             {% if i.avatar %}
-            <img src="/{{ i.avatar }}" width="100px" class="img-polaroid">
+            <img src="/{{ MEDIA_URL }}{{ i.avatar }}" width="100px" class="img-polaroid">
 
             {% endif %}
             <h3>{{ i }}</h3>
@@ -105,7 +104,7 @@
             {% endif %}
             </div>
         <div class="add_to_friends">
-        <a href="/add/{{ i.username }}" class="btn btn-success"> <i class="icon-plus icon-white"> </i>  Add to friends</a>
+        <a href="{% url 'chat.views.add_to_friends' i.username %}" class="btn btn-success"> <i class="icon-plus icon-white"> </i>  Add to friends</a>
 
 
         </div>
@@ -116,5 +115,5 @@
     </div>
 
 
-    <a href="/logout" class="btn btn-link" >logout</a>
+    <a href="{% url 'chat.views.logout' %}" class="btn btn-link" >logout</a>
 {% endblock %}

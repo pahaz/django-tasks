@@ -32,8 +32,8 @@ class ChatUserManager(BaseUserManager):
 class ChatUser(AbstractBaseUser):
     username = models.CharField(max_length=10, unique=True, default='')
     status = models.CharField(null=True, blank=True, max_length=50)
-    avatar = models.ImageField(upload_to="static/avatars",
-                               default="static/avatars/noavatar.png",
+    avatar = models.ImageField(upload_to="avatars",
+                               default="avatars/noavatar.png",
                                null=True, blank=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)

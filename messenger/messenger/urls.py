@@ -21,4 +21,6 @@ urlpatterns = patterns('',
     url(r'^chat/with/(.*)$', 'chat.views.chat_with'),
     url(r'^unread/with/(.*)$', 'chat.views.unread_with'),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {
+        'document_root': settings.MEDIA_ROOT})
 )

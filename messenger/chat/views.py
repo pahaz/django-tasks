@@ -8,10 +8,12 @@ from django.contrib.auth.models import User
 import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from chat.models import ChatUser, UserFriends, Message
+from django.contrib.auth.decorators import login_required
+
 
 def login(request):
     if request.user.is_authenticated():
-        return HttpResponseRedirect('/contacts')
+        return HttpResponseRedirect(reverse('chat.views.contacts'))
     post = ''
     form = AuthenticationForm(None)
     if request.method == 'POST':
@@ -19,17 +21,19 @@ def login(request):
         form = AuthenticationForm(None, request.POST or None)
         if form.is_valid():
             auth.login(request, form.get_user())
-            return HttpResponseRedirect('/contacts')
+            return HttpResponseRedirect(reverse('chat.views.contacts'))
 
     return render(request,  'login.html', {'form':form })
 
 
 def logout(request):
     auth.logout(request)
-    return HttpResponseRedirect('/login')
+    return HttpResponseRedirect(reverse('chat.views.login'))
 
 
 def registration(request):
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('chat.views.contacts'))
     post = ''
     form = RegistrationForm(None)
     if request.method == 'POST':
@@ -41,16 +45,13 @@ def registration(request):
             user = auth.authenticate(username=post['username'],
                                      password=post['password1'])
             auth.login(request, user)
-
-
-            return HttpResponseRedirect('/contacts')
+            return HttpResponseRedirect(reverse('chat.views.contacts'))
     return render(request,  'registration.html', {'form': form})
 
 
+@login_required
 def account(request):
     user = request.user
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/login')
     form = InfoForm(initial={'status': user.status})
     if request.method == 'POST':
         post = request.POST
@@ -65,12 +66,10 @@ def account(request):
     return render(request,  'account.html', {'user': user,
                                             'form': form})
 
-
+@login_required
 def contacts(request):
     user = request.user
     all_friends = False
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/login')
     users = ChatUser.objects.all()
     friends = UserFriends(user.id).friend_list.all()
     if str(friends) == str(users.exclude(id=user.id)):
@@ -85,11 +84,10 @@ def contacts(request):
         if (u in UserFriends(user.id).friend_list.all() and
             not user in UserFriends(u.id).friend_list.all()):
             waiting.append(u)
-        messages_read = Message.objects.filter(to_user=user, from_user=u)
+        messages_unread = Message.objects.filter(to_user=user, from_user=u, is_read=False)
         unread[u.id] = 0
-        for i in messages_read:
-            if i.is_read is False:
-                unread[u.id] += 1
+        for i in messages_unread:
+            unread[u.id] += 1
 
 
 
@@ -101,49 +99,45 @@ def contacts(request):
                                                     'waiting': waiting,
                                                     'all_friends': all_friends,
                                                     'unread': unread.items(),
-                                                        })
 
+                                                        })
+@login_required
 def add_to_friends(request, name):
     user = request.user
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/login')
-
     friend = ChatUser.objects.get(username=name)
     UserFriends(user.id).friend_list.add(ChatUser(friend.id))
     return HttpResponseRedirect('/contacts')
 
+
+@login_required
 def remove_from_friends(request, name):
     user = request.user
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/login')
     friend = ChatUser.objects.get(username=name)
     UserFriends(user.id).friend_list.remove(ChatUser(friend.id))
     UserFriends(friend.id).friend_list.remove(ChatUser(user.id))
+    return HttpResponseRedirect(reverse('chat.views.contacts'))
 
-    return HttpResponseRedirect('/contacts')
 
+@login_required
 def reject(request, name):
     user = request.user
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/login')
     friend = ChatUser.objects.get(username=name)
     UserFriends(friend.id).friend_list.remove(ChatUser(user.id))
-    return HttpResponseRedirect('/contacts')
+    return HttpResponseRedirect(reverse('chat.views.contacts'))
 
 
+@login_required
 def chat_with(request, name):
     user = request.user
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/login')
     try:
         friend = ChatUser.objects.get(username=name)
     except ObjectDoesNotExist:
-         return HttpResponseRedirect('/contacts')
+         return HttpResponseRedirect(reverse('chat.views.contacts'))
     if (not friend in UserFriends(user.id).friend_list.all() or
          not user in UserFriends(friend.id).friend_list.all()):
-        return HttpResponseRedirect('/contacts')
-    messages_read = Message.objects.filter(to_user=user, from_user=friend)
-    for mes in messages_read:
+        return HttpResponseRedirect(reverse('chat.views.contacts'))
+    messages_unread = Message.objects.filter(to_user=user, from_user=friend, is_read=False)
+    for mes in messages_unread:
         mes.is_read = True
         mes.save()
     if request.method == 'POST':
@@ -164,21 +158,14 @@ def chat_with(request, name):
                                                'friend': friend,
                                                'messages': messages})
 
-
+@login_required
 def unread_with(request, name):
     user = request.user
-    if not request.user.is_authenticated():
-        return HttpResponseRedirect('/login')
     try:
         friend = ChatUser.objects.get(username=name)
     except ObjectDoesNotExist:
-         return HttpResponseRedirect('/contacts')
-    messages_read = Message.objects.filter(to_user=user, from_user=friend)
-    unread = 0
-    for i in messages_read:
-        if i.is_read is False:
-            unread += 1
-
-
+         return HttpResponseRedirect(reverse('chat.views.contacts'))
+    messages_unread = Message.objects.filter(to_user=user, from_user=friend, is_read=False)
+    unread = len(messages_unread)
 
     return HttpResponse(unread)

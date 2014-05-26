@@ -3,7 +3,7 @@
       <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script type="text/javascript">
 
-     function show()
+    /* function show()
         {
             $.ajax({
                 url: "/unread/with/{{ user.username }}",
@@ -12,7 +12,7 @@
                     $("#unread").append(html);
                 }
             });
-        }
+        }*/
 
         $(document).ready(function(){
             show();
@@ -33,10 +33,10 @@
 
    <h1>
        {% if user.avatar  %}
-   <img src="/{{ user.avatar }}" width="60px" class="img-circle">
+   <img src="/{{ MEDIA_URL }}{{ user.avatar }}" width="60px" class="img-circle">
    {% endif %}
        Chat with {{ friend.username }}
-       <img src="/{{ friend.avatar }}" width="60px" class="img-circle">
+       <img src="/{{ MEDIA_URL }}{{ friend.avatar }}" width="60px" class="img-circle">
    </h1>
     <div class="chat">
      
@@ -66,5 +66,6 @@
   </form>
 
     <br>
-     <a href="/contacts" class="btn btn-link" >back</a><a href="/logout" class="btn btn-link" >logout</a>
+     <a href="{% url 'chat.views.contacts' %}" class="btn btn-link" >back</a>
+    <a href="{% url 'chat.views.logout' %}" class="btn btn-link" >logout</a>
 {% endblock %}
