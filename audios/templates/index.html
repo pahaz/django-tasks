@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Старт{% endblock %}
+
+{% block content %}
+{% if audio_list %}
+<table class="table">
+	<tr>
+		<th>#</th>
+		<th>Автор</th>
+		<th>Название</th>
+		<th>Проиграть</th>
+	</tr>
+	<tbody>
+	{% for audio in audio_list %}
+		<tr>
+			<td>{{ audio.id }}</td>
+			<td>{{ audio.author }}</td>
+			<td>{{ audio.name }}</td>
+			<td><audio preload="auto"><source src="{% url 'download' audio.id %}"></audio></td>
+		</tr>
+	{% endfor %}
+	</tbody>
+</table>
+{% else %}
+<p>Нет ни одной аудиозаписи</p>
+{% endif %}
+{% endblock %}
