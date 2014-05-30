@@ -1,19 +1,29 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-{% if user.is_authenticated %}
-Hello {{ user.username }}
-{% endif %}
-<hr>
+{% extends 'base.html' %}
+
+{% block body %}
 {% for x in items %}
-{{ x.film }}<br>
-{{ x.info }}<br>
-{{ x.price }}<br>
-<img src="{{ MEDIA_URL }}{{ x.poster }}" width="150" height="200">
-<hr>
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <img src="{{ MEDIA_URL }}{{ x.poster }}" alt="{{ x.film }}" class="img-thumbnail" width="200" height="250">
+    </div>
+    <div class="col-md-6">
+        <p>
+            {{ x.short_info }}
+        </p>
+    </div>
+    <div class="col-md-2">
+       <button class="btn btn-default btn-primary btn-block disabled" type="submit">{{ x.price }}<span class="glyphicon glyphicon-usd"></span></button>
+       <form method="post" action="/movie/{{ x.id }}/add/"> {% csrf_token %}
+       <div style="height: 5px"></div>
+       <button class="btn btn-default btn-primary btn-block" type="submit">Купить</button>
+       <div style="height: 5px"></div>
+       </form>
+      <input class="btn btn-default btn-success btn-block" type="submit" value="Подробнее" onclick="javascript:window.location='/movie/{{ x.id }}'">
+    </div>
+    <div class="col-md-1"></div>
+    </div>
+    <hr>
+
 {% endfor %}
-</body>
-</html>
+{% endblock %}

@@ -27,6 +27,6 @@ class RegistrationForm(forms.ModelForm):
         return user
 
 
-class InfoForm(forms.Form):
+class FormTest(forms.Form):
     avatar = forms.ImageField(label='avatar', required=False)
     status = forms.CharField(label='status', required=False)

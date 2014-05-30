@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+<form enctype="multipart/form-data" action="" method="post"> {% csrf_token %}
+<input name="status" class="form-control" placeholder="update status">
+<hr>
+<input name="avatar" type="file">
+<hr>
+<input type='submit' value="Save" class="btn">
+<a href="/account">Вернуться к профилю</a>
+</form>
+</div>
+</div>
+{% endblock %}

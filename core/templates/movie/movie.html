@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+        <img src="{{ MEDIA_URL }}{{ movies.poster }}" alt="{{ movies.film }}" class="img-thumbnail" width="200" height="250">
+    </div>
+    <div class="col-md-6">
+        <p>
+            {{ movies.info }}
+        </p>
+    </div>
+    <div class="col-md-2">
+       <button class="btn btn-default btn-primary btn-block disabled" type="submit">{{ movies.price }}<span class="glyphicon glyphicon-usd"></span></button>
+       <form method="post" action="/movie/{{ movies.id }}/add/"> {% csrf_token %}
+       <div style="height: 5px"></div>
+       <button class="btn btn-default btn-primary btn-block" type="submit">Купить</button>
+       </form>
+    </div>
+    <div class="col-md-1"></div>
+    </div>
+    <hr>
+    <div class="row">
+    {% if proof == True %}
+        <div class="col-md-6 col-md-offset-3">
+        <div class="alert alert-success"> У вас есть этот фильм. Посмотрите трейлер. {{ movies.youtube_link }}</div>
+        </div>
+    {% else %}
+        <div class="col-md-6 col-md-offset-3">
+        <div class="alert alert-danger">Необходимо купить фильм.</div>
+        </div>
+    {% endif %}
+    </div>
+{% endblock %}

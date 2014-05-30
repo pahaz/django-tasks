@@ -3,7 +3,9 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
 
 class Movie(models.Model):
     film = models.CharField(max_length=100)
-    info = models.CharField(max_length=500)
+    info = models.TextField(max_length=500)
+    short_info = models.TextField(max_length=150)
+    youtube_link = models.CharField(max_length=100)
     price = models.IntegerField()
     poster = models.ImageField(upload_to=('poster'))
     def __unicode__(self):
@@ -34,7 +36,10 @@ class User(AbstractBaseUser):
     avatar = models.ImageField(upload_to="avatars",
                                default="avatars/noavatar.png",
                                null=True, blank=True)
+    balance = models.IntegerField(default=1000)
+    is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    filmset = models.ManyToManyField(Movie)
     objects = UserManager()
 
     USERNAME_FIELD = 'username'
@@ -57,3 +62,11 @@ class User(AbstractBaseUser):
     @property
     def is_staff(self):
         return self.is_admin
+
+class Pay(models.Model):
+    class Meta():
+        db_table = "Pays"
+    name = models.CharField(max_length=30)
+
+    def __str__(self):
+        return self.name

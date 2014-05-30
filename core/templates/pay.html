@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<div style="height: 100px"></div>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+    <form action="/paying/" method="post"> {% csrf_token %}
+        <input class="form-control" name="pay" placeholder="wow, many money, such fun">
+        <hr>
+        <button class="btn btn-default btn-warning btn-block" type="submit">Добавить</button>
+    </form>
+</div>
+</div>
+
+<div style="position:absolute; bottom: 0; right: 0">
+    <img src="/static/img/doge.png" width="60%" height="60%">
+</div>
+{% endblock %}
+

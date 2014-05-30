@@ -1,9 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-Hello world!
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        Hello {{ user.username }}
+    {% else %}
+    <div style="width: 250px; margin: auto; margin-top: 20px;">
+<div class="btn-group">
+  <a href="/login"><button type="button" class="btn btn-default">Sign in</button></a>
+  <a href="/registration"><button type="button" class="btn btn-default">Sign up</button></a>
+</div>
+</div>
+    {% endif %}
+{% endblock %}

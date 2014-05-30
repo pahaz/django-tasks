@@ -1,8 +1,60 @@
-<h3>{{ user|capfirst }}, load your avatar!</h3>
-    <form enctype="multipart/form-data" action="" method="POST"> {% csrf_token %}
-    <img src="{{ MEDIA_URL }}{{ user.avatar }}">
-        <br>
-    {{ form.as_p }}
-        <br>
-    <input type='submit' value="Load" class="btn">
-    </form>
+{% extends 'base.html' %}
+
+{% block body %}
+<div class="row">
+  <div class="col-xs-6 col-sm-3">
+
+  </div>
+  <div class="col-xs-6 col-sm-3">
+    <a class="thumbnail">
+      <img src="{{ MEDIA_URL }}{{ user.avatar }}">
+    </a>
+  </div>
+  <div class="col-xs-6 col-sm-3">
+      <div class="panel panel-default">
+          <div class="panel-heading">
+              <h3 class="panel-title">User Info</h3>
+          </div>
+          <ul class="list-group">
+              <li class="list-group-item">Имя: {{ user.username }}</li>
+              <li class="list-group-item">Баланс: {{ user.balance }}<span class="glyphicon glyphicon-usd"></span></li>
+              {% if user.is_admin == True %}
+              <li class="list-group-item">Группа: Администратор</li>
+              {% else %}
+              <li class="list-group-item">Группа: пользователь</li>
+              {% endif %}
+          </ul>
+      </div>
+  <div style="margin-top: -15px">
+  <button class="btn btn-lg btn-warning btn-block" type="submit" onclick="javascript:window.location='/pay'">Пополнить счет</button>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" onclick="javascript:window.location='/account/edit'">Редактировать</button>
+  </div>
+  </div>
+  <div class="col-xs-6 col-sm-3">
+
+  </div>
+</div>
+<div style="height: 5px"></div>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+    <div class="well well-sm">{{ user.status }}</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+{% if user_films %}
+<div class="alert alert-info">Фильмы {{ user.username }}</div>
+    <div class="list-group">
+        {% for x in user_films %}
+        <a href="/movie/{{ x.id }}" class="list-group-item">
+            <h4 class="list-group-item-heading">{{ x.film }}</h4>
+            <p class="list-group-item-text">{{ x.short_info }}</p>
+        </a>
+        {% endfor %}
+    </div>
+{% else %}
+<div class="alert alert-warning">У {{ user.username }} фильмов нет :(</div>
+{% endif %}
+</div>
+</div>
+{% endblock %}
