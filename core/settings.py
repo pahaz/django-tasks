@@ -26,7 +26,7 @@ TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
-AUTH_USER_MODEL = 'movie.User'
+AUTH_USER_MODEL = 'simpleauth.User'
 
 # Application definition
 
@@ -53,6 +53,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'movie',
+    'simpleauth',
 )
 
 MIDDLEWARE_CLASSES = (

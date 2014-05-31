@@ -1,5 +1,5 @@
 from django import forms
-from movie.models import User
+from simpleauth.models import User
 
 class RegistrationForm(forms.ModelForm):
     username = forms.CharField(widget=forms.widgets.TextInput, label="Username")
