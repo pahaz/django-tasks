@@ -6,7 +6,7 @@ from django.utils.text import slugify
 class Audio(models.Model):
 	author = models.CharField(max_length = 50)
 	name = models.CharField(max_length = 50)
-	file = models.FileField(upload_to = 'documents/%Y/%m/%d')
+	file = models.FileField(upload_to = '%Y/%m/%d')
 
 	@property
 	def pretty_name(self):
