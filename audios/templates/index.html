@@ -17,7 +17,7 @@
 			<td>{{ audio.id }}</td>
 			<td>{{ audio.author }}</td>
 			<td>{{ audio.name }}</td>
-			<td><audio preload="auto"><source src="{% url 'download' audio.id %}"></audio></td>
+			<td><audio preload="auto"><source src="{{ MEDIA_URL }}{{ audio.file }}"></audio></td>
 		</tr>
 	{% endfor %}
 	</tbody>
