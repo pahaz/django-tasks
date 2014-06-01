@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	{% block head %}
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" />
+	<!-- <link rel="stylesheet" href="/static/bootstrap/css/dashboard.css" /> -->
+	<title>Музыка - {% block title %}{% endblock %}</title>
+	<script src="{% static 'audiojs/audio.min.js' %}"></script>
+    <script>
+		audiojs.events.ready(function() {
+			var as = audiojs.createAll();
+		});
+	</script>
+	{% endblock %}
+</head>
+<body>
+	{% include "navbar.html" %}
+	<div class="container" id="content">
+		{% include "modal.html" %}
+		{% block content %}{% endblock %}
+	</div>
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="{% static 'jquery.min.js' %}"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+</body>

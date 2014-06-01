@@ -1,0 +1,31 @@
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+	<div class="container">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="/">Аудиозаписи</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			{% if user.is_authenticated %}
+				<ul class="nav navbar-nav">
+					<li><a href="#" data-toggle="modal" data-target="#myModal"><span class="	glyphicon glyphicon-plus"></span> Добавить</a></li>
+				</ul>
+			{% endif %}
+			<ul class="nav navbar-nav navbar-right">
+				{% if user.is_authenticated %}
+					<p class="navbar-text">Вы вошли как {{ user.username }}</p>
+					<li><a href="{% url 'logout'%}">Выйти</a></li>
+				{% else %}
+					<li><a href="#" data-toggle="modal" data-target="#myLoginModal"><span class="glyphicon glyphicon-user"></span> Войти</a></li>
+				{% endif %}
+			</ul>
+		</div><!-- /.navbar-collapse -->
+	</div><!-- /.container-fluid -->
+</nav>

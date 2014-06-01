@@ -1,0 +1,57 @@
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="POST" action="{% url 'upload' %}" enctype="multipart/form-data">{% csrf_token %}
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Добавить</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="InputAuthor">Исполнитель</label>
+						<input type="text" class="form-control" id="InputAuthor" name="author" placeholder="Введите исполнителя">
+					</div>
+					<div class="form-group">
+						<label for="InputName">Композиция</label>
+						<input type="text" class="form-control" id="InputName" name="name" placeholder="Введите название композиции">
+					</div>
+					<div class="form-group">
+						<label for="InputFile">Файл</label>
+						<input type="file" id="InputFile" name="file">
+						<p class="help-block">Здесь необходимо добавить файл</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Добавить</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="myLoginModal" tabindex="-1" role="dialog" aria-labelledby="myLoginModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="POST" action="{% url 'login' %}" enctype="multipart/form-data">{% csrf_token %}
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">Вход</h4>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label for="InputUserName">Логин</label>
+						<input type="text" class="form-control" id="InputUserName" name="username" placeholder="Введите логин">
+					</div>
+					<div class="form-group">
+						<label for="InputPassword">Пароль</label>
+						<input type="password" class="form-control" id="InputPassword" name="password" placeholder="Введите пароль">
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Войти</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
