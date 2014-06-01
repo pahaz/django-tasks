@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     # ex: /polls/5/
 	url(r'^upload/$', views.upload_file, name='upload'),
 	url(r'^test/$', views.test, name='test'),
-	url(r'^download/(?P<audio_id>\d+)/$', views.download, name='download'),
+	# url(r'^download/(?P<audio_id>\d+)/$', views.download, name='download'),
 
     # url(r'^(?P<poll_id>\d+)/$', views.detail, name='detail'),
     # ex: /polls/5/results/

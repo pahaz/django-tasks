@@ -29,15 +29,6 @@ def upload_file(request):
 		return HttpResponse("ERROR")
 	return HttpResponse("WTF")
 
-def download(request, audio_id):
-	# return HttpResponse("You're looking at poll %s." % audio_id)
-	document = Audio.objects.get(id = audio_id)
-	response = HttpResponse()
-	response.content = document.file.read()
-	print(document.file.url)
-	# response["Content-Disposition"] = "attachment; filename={0}".format(document.pretty_name)
-	return response
-
 def detail(request, poll_id):
     return HttpResponse("You're looking at poll %s." % poll_id)
 
