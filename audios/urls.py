@@ -5,8 +5,10 @@ urlpatterns = patterns('',
    # ex: /polls/
     url(r'^$', views.index, name='index'),
     # ex: /polls/5/
-	url(r'^upload/$', views.upload_file, name='upload'),
-	url(r'^test/$', views.test, name='test'),
+	url(r'^upload', views.upload_file, name='upload'),
+	url(r'^test', views.test, name='test'),
+    url(r'^login', views.site_login, name='login'),
+    url(r'^logout', views.site_logout, name='logout'),
 	# url(r'^download/(?P<audio_id>\d+)/$', views.download, name='download'),
 
     # url(r'^(?P<poll_id>\d+)/$', views.detail, name='detail'),
