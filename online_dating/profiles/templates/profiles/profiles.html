@@ -1,0 +1,27 @@
+{% extends "profiles/base.html" %}
+
+{%  block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+
+{% if profiles_list %}
+    <ul>
+    {% for profile in profiles_list %}
+        <li><a href="/profiles/{{ profile.pk }}/">{{ profile.name }}</a></li>
+        {% if profile.photo %}
+            <p><img src="/media/{{ profile.photo }} " alt="My image" width="90" /></p>
+        {% else %}
+            <p><img src="/media/photo/default.jpg" alt="My image" width="90" /></p>
+        {% endif %}
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No profiles are available.</p>
+{% endif %}
+
+
+
+
+{% endblock %}

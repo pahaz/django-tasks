@@ -1,0 +1,84 @@
+{% load static %}
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<title>{% block title %} {% endblock %}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="stylesheet" type="text/css" media="screen" href={% static "style.css" %} />
+</head>
+<body>
+<div id="container">
+
+  <div id="top_nav">
+    <p class="topnav">
+        {% if user.is_authenticated %}
+
+            Hello, {{ user }}.
+            {% if user.profile %}
+                <a href="{% url 'create' %}">Would you like to edit your form?</a>&nbsp
+                <a href="/profiles/{{ user.profile.pk }}">Or look at it?</a>
+            {% else %}
+                <a href="{% url 'create' %}">Would you like to create a form?</a>
+
+            {% endif %}
+
+            &nbsp<a href="{% url 'logout' %}">logout</a>
+
+
+        {% else %}
+
+            <form action="{% url 'login' %}" method="post" >{% csrf_token %}
+                <label for="username">User name:</label>
+                <input type="text" name="username" value="" id="username" size="10">
+                <label for="password">Password:</label>
+                <input type="password" name="password" value="" id="password" size="10">
+                <input type="submit" value="login" >
+            </form>
+
+        <a href="{% url 'register' %}">register</a>
+    {% endif %}
+    </p>
+  </div>
+
+  <div id="main_nav">
+    <div id="navcontainer">
+      <ul id="navlist">
+        <li><a href="/m">All men</a></li>
+        <li><a href="/f">All women</a></li>
+        <li><a href="/other">All other</a></li>
+        <li><a href="/most_commented">Most commented</a></li>
+        <li><a href="/most_rated">Most rated</a></li>
+      </ul>
+    </div>
+  </div>
+
+
+  <div id="contentwrapper">
+    <div id="left">
+        <h2>Random:</h2>
+        {% for profile in random_profiles_list %}
+                <a href="/profiles/{{ profile.pk }}/">{{ profile.name }}</a>
+                {% if profile.photo %}
+                    <p><img src="/media/{{ profile.photo }} " alt="My image" width="60" /></p>
+                {% else %}
+                    <p><img src="/media/photo/default.jpg" alt="My image" width="60" /></p>
+                {% endif %}
+        {% endfor %}
+  </div>
+
+    <div id="right">
+    </div>
+
+      <div id="content">
+        {% block content %} {% endblock %}
+      </div>
+
+    <div id="footer">
+
+    </div>
+  </div>
+</div>
+</html>
+
+

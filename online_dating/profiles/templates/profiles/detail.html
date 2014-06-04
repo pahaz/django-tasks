@@ -1,0 +1,61 @@
+{% extends "profiles/base.html" %}
+
+{%  block title %}
+{{profile.name}}
+{% endblock %}
+
+
+{% block content %}
+
+    {% load staticfiles %}
+    {% if profile.photo %}
+        <img src="/media/{{ profile.photo }} " alt="My image" width="300" />
+    {% endif %}
+
+    <p>Name: {{profile.name}}</p>
+    <p>Gender: {{profile.gender}}</p>
+    <p>About: {{profile.about}}</p>
+    <p>Average rate:
+    {% if profile.average_rate != 0 %}
+        {{ profile.average_rate }}
+    {% else %}
+        No votes
+    {% endif %}
+    </p>
+
+    <h2>Comments:</h2>
+
+    {% if profile.comment_set.all %}
+        {% for comment in profile.comment_set.all %}
+            <p>
+            {% if comment.user.profile %}
+                <a href="/profiles/{{ comment.user.profile.pk }}/">{{ comment.user }}</a> : {{ comment.text }}
+            {% else %}
+                {{ comment.user }}: {{ comment.text }}
+            {% endif %}
+            </p>
+        {% endfor %}
+    {% else %}
+        <p>No comments are available.</p>
+    {% endif %}
+
+
+
+    {% if profile.owner != user %}
+        <h2>Rate this</h2>
+        <form action="" method="post"> {% csrf_token %}
+            {{  vote_form.as_ul }}
+        <input type="submit" name="action" value="vote">
+    {% endif %}
+
+    <h2>Comment this</h2>
+        <form action="" method="post"> {% csrf_token %}
+            {{  comment_form.as_ul }}
+            <input type="submit" name="action" value="create">
+        </form>
+
+
+    <p><p>
+
+
+{% endblock %}
