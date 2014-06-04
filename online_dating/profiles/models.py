@@ -2,7 +2,15 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models import Avg
 
-# Create your models here.
+class PeopleManager(models.Manager):
+	def get_queryset(self):
+		return super(PeopleManager, self).get_queryset()
+
+
+class RandomProfilesManager(models.Manager):
+	def get_queryset(self):
+		return super(RandomProfilesManager, self).get_queryset().order_by('?')[:5]
+
 
 class Profile(models.Model):
 	GENDER_CHOICE = (
@@ -18,12 +26,11 @@ class Profile(models.Model):
 	gender = models.CharField(choices=GENDER_CHOICE, max_length=5, default="other")
 	about = models.CharField(max_length=200, blank=True)
 
+	objects = PeopleManager()
+	random_profiles = RandomProfilesManager()
+
 	def __unicode__(self):
 		return self.name
-
-	def return_random(self):
-		all_profiles = Profile.objects.order_by('?')[:5]
-		return all_profiles
 
 	def average_rate(self):
 		avg = self.vote_set.aggregate(Avg('score')).get('score__avg')

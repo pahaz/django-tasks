@@ -4,12 +4,6 @@ from forms import ProfileForm, CommentForm, VoteForm
 from django.contrib.auth.decorators import login_required
 from profiles.models import Profile,Comment,Vote
 
-def random_profiles(request, n=5):
-	all_profiles = Profile.objects.order_by('?')[:n]
-	context = {'profiles_list': all_profiles}
-
-	return render(request, 'profiles/profiles.html', context)
-
 def display_objects_with_filter(request, filter):
 	profiles_list = Profile.objects.filter(gender=filter).order_by('name')
 	return display_objects(request, profiles_list, title=filter)

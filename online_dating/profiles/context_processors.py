@@ -1,8 +1,7 @@
 from profiles.models import Profile
 
 
-def random_profiles(request, n=5):
-	profiles = Profile.objects.order_by('?')[:n]
+def random_profiles(request):
 	return {
-		'random_profiles_list': profiles
+		'random_profiles_list': Profile.random_profiles.all()
 	}
