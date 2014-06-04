@@ -7,6 +7,6 @@
 В левой части страницы показаны рандомные анкеты.
 Есть возможность смотреть анкеты отдельно для мужчин и для женщин, 5 самых комментируемых, 5 с самым высоким рейтингом.
 
-![Создать анкету](http://i.imgur.com/AKQW8df)
-![Главная](http://i.imgur.com/OEcS0ZZ)
-![Анкета](http://i.imgur.com/lXjpveh)
+![Создать анкету](http://i.imgur.com/AKQW8df.png)
+![Главная](http://i.imgur.com/OEcS0ZZ.png)
+![Анкета](http://i.imgur.com/lXjpveh.png)
