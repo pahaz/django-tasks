@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models import Avg
 
 # Create your models here.
 
@@ -25,9 +26,8 @@ class Profile(models.Model):
 		return all_profiles
 
 	def average_rate(self):
-		votes = self.vote_set.all()
-		if votes:
-			avg = float(sum([vote.score for vote in votes])) / len(votes)
+		avg = self.vote_set.aggregate(Avg('score')).get('score__avg')
+		if avg:
 			return round(avg, 1)
 		else:
 			return 0
