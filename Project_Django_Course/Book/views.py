@@ -3,12 +3,11 @@ from django.shortcuts import redirect, get_object_or_404, render
 from Book.models import Book, Comments, Pay
 from Book.forms import CommentForm
 from django.core.paginator import Paginator
-import re
+
 # from django.contrib import auth
 # from django.contrib.auth.forms import UserCreationForm
 
 # Create your views here.
-
 
 def books(request, page_number=1):
     all_books = Book.objects.all()

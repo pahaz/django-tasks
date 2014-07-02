@@ -34,5 +34,9 @@
             <input type="submit" class="button" value="Добавить комментарий">
         {% endif %}
             </form>
+        <hr>
+        {% if not username %}
+            <p> <tt> Только зарегистрированные пользователи могут оставлять комментарии </tt> </p>
+        {% endif %}
     </div>
 {% endblock %}
